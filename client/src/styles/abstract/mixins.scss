@@ -1,0 +1,28 @@
+// Convert pixel to rem
+@function size($value) {
+  @return ($value / $base-font-size) * 1rem;
+}
+
+// Media queries
+@mixin on-mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin on-tablet {
+  @media (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin on-desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+// Columns
+@function col($col) {
+  @return (100% / 12) * $col;
+}
