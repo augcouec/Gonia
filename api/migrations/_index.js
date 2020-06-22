@@ -3,7 +3,7 @@ const populateProjectsCollection = require("./projects");
 
 populateUsersCollection(10, true)
   .then(() => {
-    populateProjectsCollection(1000)
+    populateProjectsCollection(1000, true)
       .then(() => {
         process.exit(0);
       })

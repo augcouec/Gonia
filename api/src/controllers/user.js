@@ -1,4 +1,4 @@
-const database = require("../database");
+const db = require("../db");
 const mongoist = require("mongoist");
 
 exports.getUser = (req, res) => {
@@ -6,7 +6,21 @@ exports.getUser = (req, res) => {
 };
 
 exports.getUsers = (req, res) => {
-  res.send({});
+  const skip = req.query.skip ? parseInt(req.query.skip, 10) : 0;
+  const limit = req.query.limit ? parseInt(req.query.limit, 10) : 100;
+
+  db.users
+    .find({}, null, { skip, limit })
+    .then((users) => {
+      if (!users) {
+        res.sendStatus(204);
+        return;
+      }
+      res.status(200).send(users);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.createUser = (req, res) => {

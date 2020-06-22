@@ -23,20 +23,20 @@ const generateProjects = (number) => {
         const status =
           statusTypes[Math.floor(Math.random() * statusTypes.length)];
         const client =
-          clientUsers[Math.floor(Math.random() * clientUsers.length)];
+          clientUsers[Math.floor(Math.random() * clientUsers.length)]._id;
         let admin = null;
         let infographiste = null;
 
         if (status === "todo") {
-          admin = adminUsers[Math.floor(Math.random() * adminUsers.length)];
+          admin = adminUsers[Math.floor(Math.random() * adminUsers.length)]._id;
         }
 
         if (status === "doing" || status === "done") {
-          admin = adminUsers[Math.floor(Math.random() * adminUsers.length)];
+          admin = adminUsers[Math.floor(Math.random() * adminUsers.length)]._id;
           infographiste =
             infographisteUsers[
               Math.floor(Math.random() * infographisteUsers.length)
-            ];
+            ]._id;
         }
 
         projects.push({
