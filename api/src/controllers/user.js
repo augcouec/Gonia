@@ -23,6 +23,17 @@ exports.getUsers = (req, res) => {
     });
 };
 
+exports.getUsersCount = (req, res) => {
+  db.users
+    .count()
+    .then((count) => {
+      res.send({ count });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+};
+
 exports.createUser = (req, res) => {
   res.send({});
 };

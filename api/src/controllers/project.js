@@ -23,6 +23,17 @@ exports.getProjects = (req, res) => {
     });
 };
 
+exports.getProjectsCount = (req, res) => {
+  db.projects
+    .count()
+    .then((count) => {
+      res.status(200).send({ count });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+};
+
 exports.createProject = (req, res) => {
   res.send({});
 };
