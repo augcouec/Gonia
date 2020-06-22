@@ -5,7 +5,6 @@ import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
 
 const App = () => {
-  console.log(process.env.PUBLIC_URL);
   return (
     <Router>
       <main className="container">
