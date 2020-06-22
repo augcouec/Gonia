@@ -47,13 +47,50 @@ exports.getProjectsCount = (req, res) => {
 };
 
 exports.createProject = (req, res) => {
-  res.send({});
+  const project = req.body;
+  db.projects
+    .insertOne(project)
+    .then((project) => {
+      if (!project) {
+        req.sendStatus(400);
+        return;
+      }
+      req.status(201).send(project.id);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.updateProject = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  const project = req.body;
+  db.projects
+    .update(query, { $set: project })
+    .then((update) => {
+      if (!update) {
+        res.sendStatus(400);
+        return;
+      }
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.deleteProject = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  db.projects
+    .remove(query)
+    .then((remove) => {
+      if (!remove) {
+        res.sendStatus(400);
+        return;
+      }
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
