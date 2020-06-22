@@ -9,13 +9,13 @@ const App = () => {
     <Router>
       <main className="container">
         <Switch>
-          <Route exact path="/">
+          <Route exact path={process.env.PUBLIC_URL}>
             <Homepage />
           </Route>
-          <Route exact path="/signin">
+          <Route exact path={`${process.env.PUBLIC_URL}/signin`}>
             <SignIn />
           </Route>
-          <Route exact path="/dashboard">
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard`}>
             <Dashboard />
           </Route>
         </Switch>
