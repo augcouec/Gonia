@@ -2,7 +2,19 @@ const db = require("../db");
 const mongoist = require("mongoist");
 
 exports.getUser = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  db.users
+    .findOne(query)
+    .then((user) => {
+      if (!user) {
+        res.sendStatus(204);
+        return;
+      }
+      res.status(200).send(user);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.getUsers = (req, res) => {
