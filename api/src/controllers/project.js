@@ -2,7 +2,19 @@ const db = require("../db");
 const mongoist = require("mongoist");
 
 exports.getProject = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  db.projects
+    .findOne(query)
+    .then((project) => {
+      if (!project) {
+        res.sendStatus(204);
+        return;
+      }
+      res.status(200).send(project);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.getProjects = (req, res) => {
@@ -23,14 +35,62 @@ exports.getProjects = (req, res) => {
     });
 };
 
+exports.getProjectsCount = (req, res) => {
+  db.projects
+    .count()
+    .then((count) => {
+      res.status(200).send({ count });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+};
+
 exports.createProject = (req, res) => {
-  res.send({});
+  const project = req.body;
+  db.projects
+    .insertOne(project)
+    .then((project) => {
+      if (!project) {
+        req.sendStatus(400);
+        return;
+      }
+      req.status(201).send(project.id);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.updateProject = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  const project = req.body;
+  db.projects
+    .update(query, { $set: project })
+    .then((update) => {
+      if (!update) {
+        res.sendStatus(400);
+        return;
+      }
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.deleteProject = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  db.projects
+    .remove(query)
+    .then((remove) => {
+      if (!remove) {
+        res.sendStatus(400);
+        return;
+      }
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };

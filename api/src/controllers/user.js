@@ -2,7 +2,19 @@ const db = require("../db");
 const mongoist = require("mongoist");
 
 exports.getUser = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  db.users
+    .findOne(query)
+    .then((user) => {
+      if (!user) {
+        res.sendStatus(204);
+        return;
+      }
+      res.status(200).send(user);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.getUsers = (req, res) => {
@@ -23,14 +35,62 @@ exports.getUsers = (req, res) => {
     });
 };
 
+exports.getUsersCount = (req, res) => {
+  db.users
+    .count()
+    .then((count) => {
+      res.send({ count });
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+};
+
 exports.createUser = (req, res) => {
-  res.send({});
+  const user = req.body;
+  db.users
+    .insertOne(user)
+    .then((user) => {
+      if (!user) {
+        req.sendStatus(400);
+        return;
+      }
+      req.status(201).send(user.id);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.updateUser = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  const user = req.body;
+  db.users
+    .update(query, { $set: user })
+    .then((update) => {
+      if (!update) {
+        res.sendStatus(400);
+        return;
+      }
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
 
 exports.deleteUser = (req, res) => {
-  res.send({});
+  const query = { _id: mongoist.ObjectId(req.params.id) };
+  db.users
+    .remove(query)
+    .then((remove) => {
+      if (!remove) {
+        res.sendStatus(400);
+        return;
+      }
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 };
