@@ -1,12 +1,27 @@
 import React, { useState } from "react";
+import Api from "../services/Api.js";
 import logo from "../styles/asset/Logotype-Gonia.svg";
 import background from "../styles/asset/login_background.png";
 
 const SignIn = (props) => {
   const [emailValue, setEmailValue] = useState(null);
   const [passwordValue, setPasswordValue] = useState(null);
+  const [errorSignIn, setErrorSignIn] = useState(false);
 
   const handleSubmit = () => {
+    setErrorSignIn(false);
+    Api.post("/signin", { email: emailValue, password: passwordValue })
+      .then((response) => {
+        if (response.status !== 200) {
+          setErrorSignIn(true);
+          return;
+        }
+
+        window.location.href = "/dashboard";
+      })
+      .catch((error) => {
+        setErrorSignIn(true);
+      });
     console.log(emailValue, passwordValue);
   };
 
@@ -58,6 +73,7 @@ const SignIn = (props) => {
           </div>
 
           <button>Se connecter</button>
+          {errorSignIn && <span>Les identifiants saisis sont invalides</span>}
         </form>
         <p className="signature">Ce produit à été concu par HILO</p>
       </div>
