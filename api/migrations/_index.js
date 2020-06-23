@@ -1,7 +1,7 @@
 const populateUsersCollection = require("./users");
 const populateProjectsCollection = require("./projects");
 
-populateUsersCollection(10, true)
+populateUsersCollection(3, true)
   .then(() => {
     populateProjectsCollection(1000, true)
       .then(() => {

@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("./services/passport");
 const userController = require("./controllers/user");
 const projectController = require("./controllers/project");
+const authenticationController = require("./controllers/authentication");
 
 // User routes
 router.get("/users/count", userController.getUsersCount);
@@ -18,5 +20,12 @@ router.get("/projects", projectController.getProjects);
 router.post("/projects/create", projectController.createProject);
 router.put("/projects/:id", projectController.updateProject);
 router.delete("/projects/:id", projectController.deleteProject);
+
+// Authentication
+router.post(
+  "/signin",
+  passport.authenticate("local"),
+  authenticationController.signin
+);
 
 module.exports = router;

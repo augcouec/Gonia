@@ -13,7 +13,9 @@ const generateUsers = (number) => {
 
   for (i = 0; i < number; i++) {
     users.push({
-      role: roles[Math.floor(Math.random() * roles.length)],
+      role: roles[i],
+      email: `${roles[i]}@gonia.fr`,
+      password: `${roles[i]}_gonia`,
     });
   }
 
