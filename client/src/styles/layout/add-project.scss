@@ -1,2 +1,15 @@
 .add-project-page {
+  .steps-progression {
+    .steps-progression__step {
+      span:last-of-type {
+        display: none;
+      }
+    }
+
+    .steps-progression__step.active {
+      span:last-of-type {
+        display: inline;
+      }
+    }
+  }
 }
