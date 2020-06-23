@@ -3,6 +3,7 @@ const mongoist = require("mongoist");
 
 exports.getProject = (req, res) => {
   const query = { _id: mongoist.ObjectId(req.params.id) };
+
   db.projects
     .findOne(query)
     .then((project) => {
@@ -10,7 +11,30 @@ exports.getProject = (req, res) => {
         res.sendStatus(204);
         return;
       }
-      res.status(200).send(project);
+      // Join client
+      db.users.find({ _id: project.clientId }).then((client) => {
+        delete project.clientId;
+        project.client = client;
+
+        // Join admin
+        db.users.find({ _id: project.adminId }).then((admin) => {
+          delete project.adminId;
+          if (admin) {
+            project.admin = admin;
+          }
+
+          // Join infographiste
+          db.users
+            .find({ _id: project.infographisteId })
+            .then((infographiste) => {
+              delete project.infographisteId;
+              if (infographiste) {
+                project.infographiste = infographiste;
+              }
+              res.status(200).send(project);
+            });
+        });
+      });
     })
     .catch((error) => {
       res.status(500).send(error);
