@@ -9,7 +9,23 @@ const AddProject = () => {
 
   const [step, setStep] = useState(1);
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    console.log("POST to API");
+  };
+
+  const nextStep = () => {
+    if (step === 3) {
+      handleSubmit();
+      return;
+    }
+    setStep(step + 1);
+  };
+
+  const previousStep = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  };
 
   const renderStepOne = () => {};
 
@@ -21,17 +37,19 @@ const AddProject = () => {
     <main className="add-project-page">
       <h1>Ajout d'une nouvelle commande</h1>
       <div className="steps-progression">
-        <div className={`steps-progression__step ${step >= 1 && "active"}`}>
+        <div className={`steps-progression__step ${step >= 1 ? "active" : ""}`}>
           <span>Étape 1 - </span>
           <span>Identification</span>
           <span> - OK</span>
         </div>
-        <div className={`steps-progression__step ${step >= 2 && "active"}`}>
+        <div className={`steps-progression__step ${step >= 2 ? "active" : ""}`}>
           <span>Étape 2 - </span>
           <span>Détails modélisation</span>
           <span> - OK</span>
         </div>
-        <div className={`steps-progression__step ${step === 3 && "active"}`}>
+        <div
+          className={`steps-progression__step ${step === 3 ? "active" : ""}`}
+        >
           <span>Étape 3 - </span>
           <span>Validation</span>
           <span> - OK</span>
@@ -40,12 +58,22 @@ const AddProject = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit();
         }}
       >
         {step === 1 && renderStepOne()}
         {step === 2 && renderStepTwo()}
         {step === 3 && renderStepThree()}
+        <div className="steps-buttons">
+          <button
+            onClick={previousStep}
+            className={`${step === 1 ? "disabled" : ""}`}
+          >
+            Étape précédente
+          </button>
+          <button onClick={nextStep}>
+            {step === 3 ? "Visualiser l'annonce" : "Étape suivante"}
+          </button>
+        </div>
       </form>
     </main>
   );
