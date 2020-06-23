@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AuthenticationManager from "../services/AuthenticationManager";
 import Api from "../services/Api";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 const AddProject = () => {
   const role = AuthenticationManager.getRole();
@@ -135,11 +136,7 @@ const AddProject = () => {
               {step === 3 ? "Visualiser l'annonce" : "Étape suivante"}
             </button>
           </div>
-          {errorSubmit && (
-            <span className="d-block mt--m mb--b error">
-              Une erreur est survenue.
-            </span>
-          )}
+          {errorSubmit && <Error error="Une erreur est survenue." />}
         </form>
       )}
     </main>
