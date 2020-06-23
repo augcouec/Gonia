@@ -12,10 +12,17 @@ label {
   font-weight: 400;
   margin-bottom: 10px;
   width: 100%;
-  max-width: 50%;
 }
 
 input {
+  margin-top: 2%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #d4d4d4;
+  padding: 0 5px 0 5px;
+}
+
+select {
   margin-top: 2%;
   height: 40px;
   border-radius: 8px;

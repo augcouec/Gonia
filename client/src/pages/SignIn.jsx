@@ -26,6 +26,7 @@ const SignIn = (props) => {
         window.location.href = "/dashboard";
       })
       .catch((error) => {
+        setLoadingSignIn(false);
         setErrorSignIn(true);
       });
     console.log(emailValue, passwordValue);
