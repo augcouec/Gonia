@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 const App = () => {
   return (
     <Router>
-      <main className="container">
+      <main>
         <Switch>
           <Route exact path="/">
             <Homepage />

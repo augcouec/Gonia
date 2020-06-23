@@ -1,0 +1,113 @@
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  font-family: "Montserrat";
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #fff;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.logo {
+  width: 70%;
+  margin-bottom: 5%;
+}
+h1 {
+  font-size: 1.2em;
+  color: #000;
+  line-height: 1.5em;
+  margin-bottom: 5%;
+}
+h4 {
+  font-size: 0.8em;
+  color: #000;
+  line-height: 1.2em;
+  font-weight: 400;
+  margin-bottom: 10%;
+}
+hr {
+  width: 20px;
+  border: 2px solid #6f31f6;
+  align-self: flex-start;
+  margin-bottom: 10%;
+  display: flex;
+  margin: 0 0 10% 0;
+}
+span {
+  color: #6f31f6;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 8%;
+}
+
+label {
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+  font-weight: 400;
+  margin-bottom: 10px;
+  width: 100%;
+}
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+input {
+  margin-top: 2%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #d4d4d4;
+  padding: 0 5px 0 5px;
+}
+::placeholder {
+  padding: 0 5px 0 5px;
+  font-weight: 400;
+}
+.password-reset {
+  color: #6f31f6;
+  font-size: 12px;
+  align-self: flex-end;
+  margin-bottom: 2%;
+  text-decoration: underline;
+}
+.label-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  label {
+    margin: 0 0 0 10px;
+  }
+}
+button {
+  margin-top: 2%;
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #6f31f6;
+  border: none;
+}
+.signature {
+  color: #000;
+  font-size: 0.6em;
+  margin-top: 10%;
+  align-self: flex-end;
+}
+
+.background-image-container {
+  width: 70%;
+  height: 100vh;
+}
+.background-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
