@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Api from "../services/Api.js";
+import AuthenticationManager from "../services/AuthenticationManager";
 import logo from "../styles/asset/Logotype-Gonia.svg";
 import background from "../styles/asset/login_background.png";
 
@@ -16,7 +17,7 @@ const SignIn = (props) => {
           setErrorSignIn(true);
           return;
         }
-
+        AuthenticationManager.saveCredentials(response.data);
         window.location.href = "/dashboard";
       })
       .catch((error) => {
