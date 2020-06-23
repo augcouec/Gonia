@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthenticationManager from "../services/AuthenticationManager";
 import Api from "../services/Api";
+import Loader from "../components/Loader";
 
 const AddProject = () => {
   const role = AuthenticationManager.getRole();
@@ -28,7 +29,7 @@ const AddProject = () => {
 
     Api.post("/projects", project)
       .then((response) => {
-        if (response !== 201) {
+        if (response.status !== 201) {
           setLoadingSubmit(false);
           setErrorSubmit(true);
           return;
@@ -113,26 +114,34 @@ const AddProject = () => {
           <span> ●</span>
         </div>
       </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        {step === 1 && renderStepOne()}
-        {step === 2 && renderStepTwo()}
-        {step === 3 && renderStepThree()}
-        <div className="steps-buttons">
-          <button
-            onClick={previousStep}
-            className={`${step === 1 ? "disabled" : ""}`}
-          >
-            Étape précédente
-          </button>
-          <button onClick={nextStep}>
-            {step === 3 ? "Visualiser l'annonce" : "Étape suivante"}
-          </button>
-        </div>
-      </form>
+      {loadingSubmit && <Loader />}
+      {!loadingSubmit && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          {step === 1 && renderStepOne()}
+          {step === 2 && renderStepTwo()}
+          {step === 3 && renderStepThree()}
+          <div className="steps-buttons">
+            <button
+              onClick={previousStep}
+              className={`${step === 1 ? "disabled" : ""}`}
+            >
+              Étape précédente
+            </button>
+            <button onClick={nextStep}>
+              {step === 3 ? "Visualiser l'annonce" : "Étape suivante"}
+            </button>
+          </div>
+          {errorSubmit && (
+            <span className="d-block mt--m mb--b error">
+              Une erreur est survenue.
+            </span>
+          )}
+        </form>
+      )}
     </main>
   );
 };
