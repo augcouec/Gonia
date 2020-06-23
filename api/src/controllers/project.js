@@ -1,5 +1,6 @@
 const db = require("../db");
 const mongoist = require("mongoist");
+const async = require("async");
 
 exports.getProject = (req, res) => {
   const query = { _id: mongoist.ObjectId(req.params.id) };
@@ -12,12 +13,12 @@ exports.getProject = (req, res) => {
         return;
       }
       // Join client
-      db.users.find({ _id: project.clientId }).then((client) => {
+      db.users.findOne({ _id: project.clientId }).then((client) => {
         delete project.clientId;
         project.client = client;
 
         // Join admin
-        db.users.find({ _id: project.adminId }).then((admin) => {
+        db.users.findOne({ _id: project.adminId }).then((admin) => {
           delete project.adminId;
           if (admin) {
             project.admin = admin;
@@ -25,7 +26,7 @@ exports.getProject = (req, res) => {
 
           // Join infographiste
           db.users
-            .find({ _id: project.infographisteId })
+            .findOne({ _id: project.infographisteId })
             .then((infographiste) => {
               delete project.infographisteId;
               if (infographiste) {
@@ -43,7 +44,7 @@ exports.getProject = (req, res) => {
 
 exports.getProjects = (req, res) => {
   const skip = req.query.skip ? parseInt(req.query.skip, 10) : 0;
-  const limit = req.query.limit ? parseInt(req.query.limit, 10) : 100;
+  const limit = req.query.limit ? parseInt(req.query.limit, 10) : 20;
 
   db.projects
     .find({}, null, { skip, limit })
@@ -52,7 +53,41 @@ exports.getProjects = (req, res) => {
         res.sendStatus(204);
         return;
       }
-      res.status(200).send(projects);
+      const results = [];
+
+      async.eachSeries(
+        projects,
+        (project, next) => {
+          // Join client
+          db.users.findOne({ _id: project.clientId }).then((client) => {
+            delete project.clientId;
+            project.client = client;
+
+            // Join admin
+            db.users.findOne({ _id: project.adminId }).then((admin) => {
+              delete project.adminId;
+              if (admin) {
+                project.admin = admin;
+              }
+
+              // Join infographiste
+              db.users
+                .findOne({ _id: project.infographisteId })
+                .then((infographiste) => {
+                  delete project.infographisteId;
+                  if (infographiste) {
+                    project.infographiste = infographiste;
+                  }
+                  results.push(project);
+                  next();
+                });
+            });
+          });
+        },
+        () => {
+          res.status(200).send(results);
+        }
+      );
     })
     .catch((error) => {
       res.status(500).send(error);
