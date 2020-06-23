@@ -3,7 +3,7 @@ button {
   height: 40px;
   border-radius: 8px;
   color: #fff;
-  background-color: #6f31f6;
+  background-color: $purple;
   border: none;
   cursor: pointer;
 }
@@ -16,6 +16,6 @@ button.disabled {
   padding: 12px;
   border-radius: 8px;
   color: #fff;
-  background-color: #6f31f6;
+  background-color: $purple;
   border: none;
 }

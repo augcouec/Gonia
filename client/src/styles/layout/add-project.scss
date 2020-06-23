@@ -1,8 +1,10 @@
 .add-project-page {
   .steps-progression {
     .steps-progression__step {
+      margin-bottom: 1rem;
       span:last-of-type {
         display: none;
+        color: $purple;
       }
     }
 

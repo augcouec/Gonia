@@ -33,46 +33,21 @@
   }
   hr {
     width: 20px;
-    border: 2px solid #6f31f6;
+    border: 2px solid $purple;
     align-self: flex-start;
     margin-bottom: 10%;
     display: flex;
     margin: 0 0 10% 0;
   }
   span {
-    color: #6f31f6;
+    color: $purple;
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 8%;
   }
 
-  label {
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    font-size: 0.8em;
-    font-weight: 400;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  input {
-    margin-top: 2%;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid #d4d4d4;
-    padding: 0 5px 0 5px;
-  }
-  ::placeholder {
-    padding: 0 5px 0 5px;
-    font-weight: 400;
-  }
   .password-reset {
-    color: #6f31f6;
+    color: $purple;
     font-size: 12px;
     align-self: flex-end;
     margin-bottom: 2%;
