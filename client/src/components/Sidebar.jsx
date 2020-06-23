@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import AuthenticationManager from "../services/AuthenticationManager";
+import logo from "../styles/asset/Logotype-Gonia.svg";
 
 const Sidebar = () => {
   const role = AuthenticationManager.getRole();
   return (
     <aside className="sidebar">
-      <span className="sidebar__brand">Gonia</span>
+      <img src={logo} alt="" className="sidebar__brand" />
       <ul>
         <li>
           <NavLink to="/dashboard" activeClassName="active">
