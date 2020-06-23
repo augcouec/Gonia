@@ -1,7 +1,21 @@
 body {
-  font-family: "Helvetica";
+  font-family: "Montserrat";
   min-height: 100vh;
   font-size: 16px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
+}
+
+.base-layout {
+  width: 100%;
+  display: flex;
+
+  .sidebar {
+    width: 20%;
+  }
+
+  main {
+    width: 80%;
+    padding: 50px;
+  }
 }

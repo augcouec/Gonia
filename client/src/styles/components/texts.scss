@@ -1,6 +1,14 @@
 a {
-  color: cyan;
+  color: #6f31f6;
   text-decoration: none;
+}
+
+a.active {
+  color: #6f31f6 !important;
+}
+
+.disabled {
+  cursor: not-allowed;
 }
 
 h1 {
