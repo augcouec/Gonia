@@ -1,0 +1,23 @@
+.sidebar {
+  width: 20vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 20px;
+
+  &__brand {
+    font-weight: bold;
+    margin-top: 100px;
+  }
+
+  ul {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      font-weight: bold;
+      padding: 10px 0;
+    }
+  }
+}

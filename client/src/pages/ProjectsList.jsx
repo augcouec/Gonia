@@ -7,11 +7,8 @@ const Dashboard = () => {
     window.location.href = "/signin";
   }
   return (
-    <main className="dashboard-page">
-      <h1>Tableau de board</h1>
-      <a href="/projects/add" className="button">
-        Ajouter une commande
-      </a>
+    <main className="projects-list-page">
+      <h1>Commandes</h1>
     </main>
   );
 };

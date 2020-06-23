@@ -1,19 +1,16 @@
 import React from "react";
 import AuthenticationManager from "../services/AuthenticationManager";
 
-const Dashboard = () => {
+const AddProject = () => {
   const role = AuthenticationManager.getRole();
   if (!role) {
     window.location.href = "/signin";
   }
   return (
-    <main className="dashboard-page">
-      <h1>Tableau de board</h1>
-      <a href="/projects/add" className="button">
-        Ajouter une commande
-      </a>
+    <main className="add-project-page">
+      <h1>Ajout d'une nouvelle commande</h1>
     </main>
   );
 };
 
-export default Dashboard;
+export default AddProject;

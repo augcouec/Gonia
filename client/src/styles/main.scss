@@ -9,10 +9,15 @@
 
 // Components
 @import "components/texts";
+@import "components/buttons";
+@import "components/sidebar";
 
 // Layout
 @import "layout/dashboard";
 @import "layout/signin";
+@import "layout/home";
+@import "layout/add-project";
+@import "layout/projects-list";
 
 // Font
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext");
