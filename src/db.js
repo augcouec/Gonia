@@ -1,7 +1,6 @@
 const mongoist = require("mongoist");
-const settings = require("../settings");
+require("dotenv").config();
 
-const connectionString =
-  process.env.DATABASE_URI || settings.database.connectionURI;
+const connectionString = process.env.DATABASE_URI;
 
 module.exports = mongoist(connectionString);
