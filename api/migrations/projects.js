@@ -17,7 +17,7 @@ const generateProjects = (number) => {
       const infographisteUsers = users.filter(
         (user) => user.role === "infographiste"
       );
-      const statusTypes = ["pending", "todo", "doing", "done"];
+      const statusTypes = ["pending", "todo", "doing", "done", "finished"];
 
       for (i = 0; i < number; i++) {
         const status =
@@ -32,7 +32,7 @@ const generateProjects = (number) => {
             adminUsers[Math.floor(Math.random() * adminUsers.length)]._id;
         }
 
-        if (status === "doing" || status === "done") {
+        if (status === "doing" || status === "done" || status === "finished") {
           adminId =
             adminUsers[Math.floor(Math.random() * adminUsers.length)]._id;
           infographisteId =

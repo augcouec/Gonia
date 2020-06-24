@@ -99,22 +99,21 @@ const AddProject = () => {
             onChange={(e) => setProductSku(e.target.value)}
           />
         </label>
-        <p className="info-text">
+        <p className="info-text d-block mb--m">
           Nous vous recommandons de saisir le SKU présent pour ce produit dans
           votre catalogue.
         </p>
-        <label>
-          Catégorie (optionnel)
-          <select
-            value={productCategory}
-            onChange={(e) => setProductCategory(e.target.value)}
-          >
-            <option value="">--Sélectionnez une catégorie--</option>
-            <option value="bottle">Bouteille</option>
-            <option value="desk">Bureau</option>
-            <option value="chair">Chaise</option>
-          </select>
-        </label>
+        <label htmlFor="productCategory">Catégorie (optionnel)</label>
+        <select
+          id="productCategory"
+          value={productCategory}
+          onChange={(e) => setProductCategory(e.target.value)}
+        >
+          <option value="">--Sélectionnez une catégorie--</option>
+          <option value="bottle">Bouteille</option>
+          <option value="desk">Bureau</option>
+          <option value="chair">Chaise</option>
+        </select>
       </>
     );
   };
