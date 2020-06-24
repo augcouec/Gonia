@@ -18,13 +18,15 @@ a.active {
 .info-text {
   font-size: 0.75rem;
 }
-
+.semi-bold {
+  font-weight: 600;
+}
 .bold {
   font-weight: bold;
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 2rem;
 }
