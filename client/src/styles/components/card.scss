@@ -34,22 +34,22 @@
 
   &--pending {
     border-color: $pending;
-    color: $pending;
+    color: $pending !important;
   }
   &--todo {
     border-color: $purple;
-    color: $purple;
+    color: $purple !important;
   }
   &--doing {
     border-color: orange;
-    color: orange;
+    color: orange !important;
   }
   &--done {
     border-color: $done;
-    color: $done;
+    color: $done !important;
   }
   &--finished {
     border-color: $finished;
-    color: $finished;
+    color: $finished !important;
   }
 }
