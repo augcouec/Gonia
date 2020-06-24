@@ -16,6 +16,8 @@ const generateUsers = (number) => {
       role: roles[i],
       email: `${roles[i]}@gonia.fr`,
       password: `${roles[i]}_gonia`,
+      firstname: chance.first({ nationality: "fr" }),
+      lastname: chance.last({ nationality: "fr" }),
     });
   }
 
