@@ -7,6 +7,7 @@ exports.getProject = (req, res) => {
 
   db.projects
     .findOne(query)
+    .sort({ creationDate: 1 })
     .then((project) => {
       if (!project) {
         res.sendStatus(204);
@@ -108,6 +109,7 @@ exports.getProjectsCount = (req, res) => {
 exports.createProject = (req, res) => {
   const project = req.body;
   project.clientId = mongoist.ObjectId(project.clientId);
+  project.creationDate = new Date();
   db.projects
     .insertOne(project)
     .then((project) => {
@@ -126,6 +128,7 @@ exports.createProject = (req, res) => {
 exports.updateProject = (req, res) => {
   const query = { _id: mongoist.ObjectId(req.params.id) };
   const project = req.body;
+  project.updateDate = new Date();
   db.projects
     .update(query, { $set: project })
     .then((update) => {

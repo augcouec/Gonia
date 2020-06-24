@@ -43,6 +43,7 @@ const generateProjects = (number) => {
         }
 
         projects.push({
+          creationDate: new Date(),
           status,
           clientId,
           adminId,
