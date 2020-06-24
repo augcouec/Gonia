@@ -1,0 +1,11 @@
+.product-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 50%;
+  margin: 0 -8px;
+
+  img {
+    width: calc(33% - 16px);
+    padding: 8px;
+  }
+}

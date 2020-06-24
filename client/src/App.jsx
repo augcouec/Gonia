@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
 import AddProject from "./pages/AddProject";
 import ProjectsList from "./pages/ProjectsList";
+import Project from "./pages/Project";
 
 const App = () => {
   return (
@@ -34,6 +35,12 @@ const App = () => {
             <div className="base-layout">
               <Sidebar />
               <AddProject />
+            </div>
+          </Route>
+          <Route exact path="/projects/:id">
+            <div className="base-layout">
+              <Sidebar />
+              <Project />
             </div>
           </Route>
         </Switch>
