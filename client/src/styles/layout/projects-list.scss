@@ -1,9 +1,7 @@
 .projects-list-page {
-}
-.listing-card {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-bottom: 10%;
-  margin-top: 5%;
+  .listing-card {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1rem 50px -1rem;
+  }
 }

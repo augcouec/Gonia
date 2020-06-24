@@ -56,8 +56,16 @@ const Dashboard = () => {
       <h1>Mes Annonces</h1>
       <h4>Annonce en attente de modération </h4>
       <div className="listing-card">
-        {error && <Error error="Une erreur est survenue." />}
-        {loading && <Loader />}
+        {error && (
+          <div className="ml--s">
+            <Error error="Une erreur est survenue." />
+          </div>
+        )}
+        {loading && (
+          <div className="ml--s">
+            <Loader />
+          </div>
+        )}
         {!loading &&
           pendingProjects.map((project, index) => (
             <ProjectCardAdmin project={project} key={index} />
@@ -65,8 +73,16 @@ const Dashboard = () => {
       </div>
       <h4>Annonce en attente d'infographiste </h4>
       <div className="listing-card">
-        {error && <Error error="Une erreur est survenue." />}
-        {loading && <Loader />}
+        {error && (
+          <div className="ml--s">
+            <Error error="Une erreur est survenue." />
+          </div>
+        )}
+        {loading && (
+          <div className="ml--s">
+            <Loader />
+          </div>
+        )}
         {!loading &&
           todoProjects.map((project, index) => (
             <ProjectCardAdmin project={project} key={index} />
@@ -74,8 +90,16 @@ const Dashboard = () => {
       </div>
       <h4>Annonce en cours de création </h4>
       <div className="listing-card">
-        {error && <Error error="Une erreur est survenue." />}
-        {loading && <Loader />}
+        {error && (
+          <div className="mr--s">
+            <Error error="Une erreur est survenue." />
+          </div>
+        )}
+        {loading && (
+          <div className="ml--s">
+            <Loader />
+          </div>
+        )}
         {!loading &&
           doingProjects.map((project, index) => (
             <ProjectCardAdmin project={project} key={index} />
@@ -83,7 +107,16 @@ const Dashboard = () => {
       </div>
       <h4>Annonce en attente de validation de qualité </h4>
       <div className="listing-card">
-        {loading && <Loader />}
+        {error && (
+          <div className="ml--s">
+            <Error error="Une erreur est survenue." />
+          </div>
+        )}
+        {loading && (
+          <div className="ml--s">
+            <Loader />
+          </div>
+        )}
         {!loading &&
           doneProjects.map((project, index) => (
             <ProjectCardAdmin project={project} key={index} />
@@ -91,8 +124,16 @@ const Dashboard = () => {
       </div>
       <h4>Annonce archivées </h4>
       <div className="listing-card">
-        {error && <Error error="Une erreur est survenue." />}
-        {loading && <Loader />}
+        {error && (
+          <div className="ml--s">
+            <Error error="Une erreur est survenue." />
+          </div>
+        )}
+        {loading && (
+          <div className="ml--s">
+            <Loader />
+          </div>
+        )}
         {!loading &&
           finishedProjects.map((project, index) => (
             <ProjectCardAdmin project={project} key={index} />
