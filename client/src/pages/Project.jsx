@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import AuthenticationManager from "../services/AuthenticationManager";
 import Api from "../services/Api";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import LabelValue from "../components/LabelValue";
 
 const Project = () => {
+  const role = AuthenticationManager.getRole();
+  if (!role) {
+    window.location.href = "/signin";
+  }
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
