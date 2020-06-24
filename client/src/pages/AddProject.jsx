@@ -143,106 +143,121 @@ const AddProject = () => {
           l'infographiste d'avoir les données nécessaires pour faire la
           modélisation.
         </p>
-        <h4>Dimensions</h4>
-        <span className="d-block bold mb--xs">Unité de mesure</span>
-        <div className="input-radio">
-          <input
-            type="radio"
-            checked
-            value={productDimensionUnit}
-            id="milimeter"
-            name="dimensionUnit"
-            onChange={(e) => setProductDimensionUnit(e.target.value)}
-          />
-          <label htmlFor="milimeter">Milimètres</label>
-        </div>
-        <div className="input-radio">
-          <input
-            type="radio"
-            value={productDimensionUnit}
-            id="inch"
-            name="dimensionUnit"
-            onChange={(e) => setProductDimensionUnit(e.target.value)}
-          />
-          <label htmlFor="inch">Pouces</label>
-        </div>
-        <div className="dimentions-inputs mb--m">
-          <label>
-            Longueur :
-            <input
-              type="number"
-              placeholder="Longueur"
-              value={productLength}
-              onChange={(e) => setProductLength(e.target.value)}
+        <div className="detail-container">
+          <div className="detail-left-side">
+            <h4>Dimensions</h4>
+            <span className="d-block bold mb--s">Unité de mesure</span>
+            <div className="input-radio">
+              <input
+                type="radio"
+                checked
+                value={productDimensionUnit}
+                id="milimeter"
+                name="dimensionUnit"
+                onChange={(e) => setProductDimensionUnit(e.target.value)}
+              />
+              <label htmlFor="milimeter">Milimètres</label>
+            </div>
+            <div className="input-radio">
+              <input
+                type="radio"
+                value={productDimensionUnit}
+                id="inch"
+                name="dimensionUnit"
+                onChange={(e) => setProductDimensionUnit(e.target.value)}
+              />
+              <label htmlFor="inch">Pouces</label>
+            </div>
+            <div className="dimentions-inputs mb--m mt--s">
+              <label>
+                Longueur :
+                <input
+                  type="number"
+                  placeholder="Longueur"
+                  value={productLength}
+                  onChange={(e) => setProductLength(e.target.value)}
+                />
+              </label>
+              <label>
+                Largeur :
+                <input
+                  type="number"
+                  placeholder="Largeur"
+                  value={productWidth}
+                  onChange={(e) => setProductWidth(e.target.value)}
+                />
+              </label>
+              <label>
+                Profondeur :
+                <input
+                  type="number"
+                  placeholder="Profondeur"
+                  value={productDepth}
+                  onChange={(e) => setProductDepth(e.target.value)}
+                />
+              </label>
+            </div>
+            <h4>Autres informations</h4>
+            <label>
+              Matériel :
+              <input
+                type="text"
+                placeholder="Matériel"
+                value={productMaterial}
+                onChange={(e) => setProductMaterial(e.target.value)}
+              />
+            </label>
+            <label>
+              URL de la fiche produit (optionnel) :
+              <input
+                type="text"
+                placeholder="URL"
+                value={productUrl}
+                onChange={(e) => setProductUrl(e.target.value)}
+              />
+            </label>
+            <label htmlFor="productDetails"> Details :</label>
+            <textarea
+              placeholder="Détails"
+              value={productDetails}
+              id="productDetails"
+              rows="10"
+              onChange={(e) => setProductDetails(e.target.value)}
             />
-          </label>
-          <label>
-            Largeur :
-            <input
-              type="number"
-              placeholder="Largeur"
-              value={productWidth}
-              onChange={(e) => setProductWidth(e.target.value)}
+          </div>
+          <div className="detail-right-side">
+            <h4>Fichiers</h4>
+            <label htmlFor="productDetails"> Photos ( 6 photos) :</label>
+
+            <FilePond
+              files={filesPartOne}
+              allowMultiple={true}
+              maxFiles={3}
+              className="file-input"
+              server="/api/files"
+              oninit={() => handleInit()}
+              onupdatefiles={(fileItems) => {
+                setFilesPartOne(fileItems.map((fileItem) => fileItem.file));
+              }}
             />
-          </label>
-          <label>
-            Profondeur :
-            <input
-              type="number"
-              placeholder="Profondeur"
-              value={productDepth}
-              onChange={(e) => setProductDepth(e.target.value)}
+            <label htmlFor="productDetails">
+              {" "}
+              Autres fichier (optionnel) :
+            </label>
+
+            <FilePond
+              files={filesPartTwo}
+              allowMultiple={true}
+              maxFiles={3}
+              style="width:100%"
+              server="/api/files"
+              oninit={() => handleInit()}
+              onupdatefiles={(fileItems) => {
+                setFilesPartTwo(fileItems.map((fileItem) => fileItem.file));
+              }}
             />
-          </label>
+          </div>
         </div>
-        <h4>Autres informations</h4>
-        <label>
-          Matériel :
-          <input
-            type="text"
-            placeholder="Matériel"
-            value={productMaterial}
-            onChange={(e) => setProductMaterial(e.target.value)}
-          />
-        </label>
-        <label>
-          URL de la fiche produit (optionnel) :
-          <input
-            type="text"
-            placeholder="URL"
-            value={productUrl}
-            onChange={(e) => setProductUrl(e.target.value)}
-          />
-        </label>
-        <label htmlFor="productDetails"> Details :</label>
-        <textarea
-          placeholder="Détails"
-          value={productDetails}
-          id="productDetails"
-          rows="10"
-          onChange={(e) => setProductDetails(e.target.value)}
-        />
-        <h4 className="d-block mt--m">Fichiers</h4>
-        <FilePond
-          files={filesPartOne}
-          allowMultiple={true}
-          maxFiles={3}
-          server="/api/files"
-          oninit={() => handleInit()}
-          onupdatefiles={(fileItems) => {
-            setFilesPartOne(fileItems.map((fileItem) => fileItem.file));
-          }}
-        />
-        <FilePond
-          files={filesPartTwo}
-          allowMultiple={true}
-          maxFiles={3}
-          server="/api/files"
-          oninit={() => handleInit()}
-          onupdatefiles={(fileItems) => {
-            setFilesPartTwo(fileItems.map((fileItem) => fileItem.file));
-          }}
-        />
       </>
     );
   };

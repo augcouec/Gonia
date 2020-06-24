@@ -18,36 +18,50 @@
   .steps-buttons {
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 100%;
+  }
+  .detail-container {
+    display: flex;
+  }
+  .detail-left-side {
+    display: flex;
+    flex-direction: column;
+    max-width: 45%;
+    border-right: 1px solid #ccc;
+    padding-right: 2%;
+  }
+  .detail-right-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 45%;
+    margin-left: 2%;
+    padding-left: 2%;
   }
 
   .dimentions-inputs {
     display: flex;
+    flex-wrap: wrap;
     label {
       margin-left: 10px;
       margin-right: 10px;
+      max-width: 25%;
     }
-
-    label:first-of-type {
-      margin-left: 0;
-    }
-
-    label:last-of-type  {
-      margin-right: 0;
-    }
+  }
+  .filepond--wrapper {
+    width: 100%;
   }
 
   form {
     label {
-      max-width: 50%;
+      max-width: 100%;
     }
 
     select {
-      max-width: 50%;
+      max-width: 100%;
     }
 
     textarea {
-      max-width: 50%;
+      max-width: 100%;
     }
   }
 }
