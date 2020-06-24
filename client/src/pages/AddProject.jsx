@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { FilePond, registerPlugin } from "react-filepond";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import AuthenticationManager from "../services/AuthenticationManager";
 import Api from "../services/Api";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const AddProject = () => {
   const role = AuthenticationManager.getRole();
@@ -21,6 +25,11 @@ const AddProject = () => {
   const [productLength, setProductLength] = useState("");
   const [productWidth, setProductWidth] = useState("");
   const [productDepth, setProductDepth] = useState("");
+  const [productMaterial, setProductMaterial] = useState("");
+  const [productUrl, setProductUrl] = useState("");
+  const [productDetails, setProductDetails] = useState("");
+  const [filesPartOne, setFilesPartOne] = useState([]);
+  const [filesPartTwo, setFilesPartTwo] = useState([]);
 
   const handleSubmit = () => {
     setErrorSubmit(false);
@@ -29,19 +38,20 @@ const AddProject = () => {
     const project = {
       status: "pending",
       clientId: userId,
-      products: [
-        {
-          name: productName,
-          sku: productSku,
-          category: productCategory,
-          dimensions: {
-            unit: productDimensionUnit,
-            length: productLength,
-            width: productWidth,
-            depth: productDepth,
-          },
+      product: {
+        name: productName,
+        sku: productSku,
+        category: productCategory,
+        dimensions: {
+          unit: productDimensionUnit,
+          length: productLength,
+          width: productWidth,
+          depth: productDepth,
         },
-      ],
+        material: productMaterial,
+        url: productUrl,
+        details: productDetails,
+      },
     };
 
     Api.post("/projects", project)
@@ -57,6 +67,10 @@ const AddProject = () => {
         setErrorSubmit(true);
         setLoadingSubmit(false);
       });
+  };
+
+  const handleInit = () => {
+    console.log("init file pond");
   };
 
   const nextStep = () => {
@@ -99,22 +113,21 @@ const AddProject = () => {
             onChange={(e) => setProductSku(e.target.value)}
           />
         </label>
-        <p className="info-text">
+        <p className="info-text d-block mb--m">
           Nous vous recommandons de saisir le SKU présent pour ce produit dans
           votre catalogue.
         </p>
-        <label>
-          Catégorie (optionnel)
-          <select
-            value={productCategory}
-            onChange={(e) => setProductCategory(e.target.value)}
-          >
-            <option value="">--Sélectionnez une catégorie--</option>
-            <option value="bottle">Bouteille</option>
-            <option value="desk">Bureau</option>
-            <option value="chair">Chaise</option>
-          </select>
-        </label>
+        <label htmlFor="productCategory">Catégorie (optionnel)</label>
+        <select
+          id="productCategory"
+          value={productCategory}
+          onChange={(e) => setProductCategory(e.target.value)}
+        >
+          <option value="">--Sélectionnez une catégorie--</option>
+          <option value="bottle">Bouteille</option>
+          <option value="desk">Bureau</option>
+          <option value="chair">Chaise</option>
+        </select>
       </>
     );
   };
@@ -151,7 +164,7 @@ const AddProject = () => {
             onChange={(e) => setProductDimensionUnit(e.target.value)}
           />
         </div>
-        <div className="dimentions-inputs">
+        <div className="dimentions-inputs mb--m">
           <label>
             Longueur :
             <input
@@ -180,6 +193,53 @@ const AddProject = () => {
             />
           </label>
         </div>
+        <h3>Autres informations</h3>
+        <label>
+          Matériel :
+          <input
+            type="text"
+            placeholder="Matériel"
+            value={productMaterial}
+            onChange={(e) => setProductMaterial(e.target.value)}
+          />
+        </label>
+        <label>
+          URL de la fiche produit (optionnel) :
+          <input
+            type="text"
+            placeholder="URL"
+            value={productUrl}
+            onChange={(e) => setProductUrl(e.target.value)}
+          />
+        </label>
+        <label htmlFor="productDetails"> Details :</label>
+        <textarea
+          placeholder="Détails"
+          value={productDetails}
+          id="productDetails"
+          rows="10"
+          onChange={(e) => setProductDetails(e.target.value)}
+        />
+        <FilePond
+          files={filesPartOne}
+          allowMultiple={true}
+          maxFiles={3}
+          server="/api/files"
+          oninit={() => handleInit()}
+          onupdatefiles={(fileItems) => {
+            setFilesPartOne(fileItems.map((fileItem) => fileItem.file));
+          }}
+        />
+        <FilePond
+          files={filesPartTwo}
+          allowMultiple={true}
+          maxFiles={3}
+          server="/api/files"
+          oninit={() => handleInit()}
+          onupdatefiles={(fileItems) => {
+            setFilesPartTwo(fileItems.map((fileItem) => fileItem.file));
+          }}
+        />
       </>
     );
   };

@@ -29,7 +29,6 @@ const SignIn = (props) => {
         setLoadingSignIn(false);
         setErrorSignIn(true);
       });
-    console.log(emailValue, passwordValue);
   };
 
   return (

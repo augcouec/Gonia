@@ -1,3 +1,7 @@
+// Libs
+@import "lib/filepond.min.css";
+@import "lib/filepond-plugin-image-preview.css";
+
 // Abstract
 @import "abstract/variables";
 @import "abstract/mixins";
@@ -12,7 +16,8 @@
 @import "components/buttons";
 @import "components/sidebar";
 @import "components/form";
-@import "components/card.scss";
+@import "components/card";
+@import "components/filepond";
 
 // Layout
 @import "layout/dashboard";
