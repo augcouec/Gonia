@@ -49,6 +49,8 @@ const AddProject = () => {
           depth: productDepth,
         },
         material: productMaterial,
+        url: productUrl,
+        details: productDetails,
       },
     };
 
