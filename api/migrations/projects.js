@@ -18,6 +18,7 @@ const generateProjects = (number) => {
         (user) => user.role === "infographiste"
       );
       const statusTypes = ["pending", "todo", "doing", "done", "finished"];
+      const productCategories = ["bottle", "desk", "chair"];
 
       for (i = 0; i < number; i++) {
         const status =
@@ -46,6 +47,14 @@ const generateProjects = (number) => {
           clientId,
           adminId,
           infographisteId,
+          product: {
+            name: `My super product ${i + 1}`,
+            sku: `AA00${i + 1}`,
+            category:
+              productCategories[
+                Math.floor(Math.random() * productCategories.length)
+              ],
+          },
         });
       }
       resolve(projects);
