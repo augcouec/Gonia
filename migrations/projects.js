@@ -18,7 +18,7 @@ const generateProjects = (number) => {
         (user) => user.role === "infographiste"
       );
       const statusTypes = ["pending", "todo", "doing", "done", "finished"];
-      const productCategories = ["bottle", "desk", "chair"];
+      const productCategories = ["Bouteille", "Bureau", "Chaise"];
 
       for (i = 0; i < number; i++) {
         const status =
