@@ -29,7 +29,16 @@ select {
   padding: 0 5px 0 5px;
 }
 
+textarea {
+  border-radius: 8px;
+  border: 1px solid #d4d4d4;
+  padding: 10px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 ::placeholder {
+  font-family: "Montserrat", "Helvetica";
   padding: 0 5px 0 5px;
   font-weight: 400;
 }
@@ -47,5 +56,9 @@ select {
   input {
     height: inherit;
     margin: 0;
+  }
+
+  textarea {
+    box-sizing: border-box;
   }
 }
