@@ -34,3 +34,19 @@ select {
   padding: 0 5px 0 5px;
   font-weight: 400;
 }
+
+.input-radio {
+  display: flex;
+  margin-bottom: 10px;
+
+  label {
+    width: inherit;
+    margin: 0;
+    padding-right: 10px;
+  }
+
+  input {
+    height: inherit;
+    margin: 0;
+  }
+}

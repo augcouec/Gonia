@@ -20,6 +20,22 @@
     justify-content: space-between;
   }
 
+  .dimentions-inputs {
+    display: flex;
+    label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    label:first-of-type {
+      margin-left: 0;
+    }
+
+    label:last-of-type  {
+      margin-right: 0;
+    }
+  }
+
   form {
     label {
       max-width: 50%;

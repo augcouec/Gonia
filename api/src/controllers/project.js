@@ -108,7 +108,6 @@ exports.getProjectsCount = (req, res) => {
 exports.createProject = (req, res) => {
   const project = req.body;
   project.clientId = mongoist.ObjectId(project.clientId);
-  console.log(project);
   db.projects
     .insertOne(project)
     .then((project) => {
