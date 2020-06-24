@@ -7,7 +7,6 @@ exports.getProject = (req, res) => {
 
   db.projects
     .findOne(query)
-    .sort({ creationDate: 1 })
     .then((project) => {
       if (!project) {
         res.sendStatus(204);
@@ -48,7 +47,9 @@ exports.getProjects = (req, res) => {
   const limit = req.query.limit ? parseInt(req.query.limit, 10) : 20;
 
   db.projects
-    .find({}, null, { skip, limit })
+    .findAsCursor({}, null, { skip, limit })
+    .sort({ creationDate: -1 })
+    .toArray()
     .then((projects) => {
       if (!projects) {
         res.sendStatus(204);
