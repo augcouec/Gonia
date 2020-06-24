@@ -1,3 +1,134 @@
 .dashboard-page {
   background-color: $background;
 }
+.dashboard-container {
+  display: flex;
+}
+.dashboard-left {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin-right: 5%;
+}
+.dashboard-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30%;
+}
+.dashboard-title-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+.dashboard-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.card-resume {
+  display: flex;
+  background-color: #fff;
+  margin: 10px;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  justify-content: space-between;
+}
+.card-resume-right {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  justify-content: space-evenly;
+}
+.card-resume-left {
+  width: 45%;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.card-resume-subtitle {
+  font-weight: 700;
+  color: $purple;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card-facturation {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 10px;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+}
+.card-facturation-spaces {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+
+  span {
+    text-align: center;
+    width: 30%;
+  }
+}
+
+.dashboard-cta {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 10px;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  height: 15%;
+  justify-content: center;
+}
+
+.card-annonces {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 10px;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  height: 85%;
+}
+.card-commandes-line {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  align-items: center;
+}
+.card-commandes-line:nth-child(2n) {
+  background-color: $background;
+}
+
+.cercle {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  display: flex;
+
+  &--pending {
+    background: $pending;
+  }
+  &--todo {
+    background: $purple;
+  }
+  &--doing {
+    background: orange;
+  }
+  &--done {
+    background: $done;
+  }
+  &--finished {
+    background: $finished;
+  }
+}
