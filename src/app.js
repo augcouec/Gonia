@@ -16,6 +16,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use("/api", router);
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log("App listening on port 8000!");
 });
