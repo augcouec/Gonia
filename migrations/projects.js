@@ -19,6 +19,9 @@ const generateProjects = (number) => {
       );
       const statusTypes = ["pending", "todo", "doing", "done", "finished"];
       const productCategories = ["Bouteille", "Bureau", "Chaise"];
+      const productDimensionUnit = ["Millimètres", "Pouces"];
+      const materials = ["Bois", "Carbon", "Verre", "Tissu"];
+      const contactModes = ["onEachStep", "onFinished", "none"];
 
       for (i = 0; i < number; i++) {
         const status =
@@ -55,6 +58,20 @@ const generateProjects = (number) => {
               productCategories[
                 Math.floor(Math.random() * productCategories.length)
               ],
+            dimensions: {
+              unit:
+                productDimensionUnit[
+                  Math.floor(Math.random() * productDimensionUnit.length)
+                ],
+              length: Math.floor(Math.random() * 1000),
+              width: Math.floor(Math.random() * 1000),
+              depth: Math.floor(Math.random() * 1000),
+            },
+            material: materials[Math.floor(Math.random() * materials.length)],
+            url: "www.google.fr",
+            details: chance.sentence(),
+            contactMode:
+              contactModes[Math.floor(Math.random() * contactModes.length)],
           },
         });
       }
