@@ -21,7 +21,9 @@ const AddProject = () => {
   const [productName, setProductName] = useState("");
   const [productSku, setProductSku] = useState("");
   const [productCategory, setProductCategory] = useState("");
-  const [productDimensionUnit, setProductDimensionUnit] = useState("milimeter");
+  const [productDimensionUnit, setProductDimensionUnit] = useState(
+    "Millimètres"
+  );
   const [productLength, setProductLength] = useState("");
   const [productWidth, setProductWidth] = useState("");
   const [productDepth, setProductDepth] = useState("");
@@ -151,7 +153,7 @@ const AddProject = () => {
               <input
                 type="radio"
                 checked
-                value={productDimensionUnit}
+                value="Millimètres"
                 id="milimeter"
                 name="dimensionUnit"
                 onChange={(e) => setProductDimensionUnit(e.target.value)}
@@ -161,7 +163,7 @@ const AddProject = () => {
             <div className="input-radio">
               <input
                 type="radio"
-                value={productDimensionUnit}
+                value="Pouces"
                 id="inch"
                 name="dimensionUnit"
                 onChange={(e) => setProductDimensionUnit(e.target.value)}
@@ -271,7 +273,7 @@ const AddProject = () => {
         <div className="input-radio">
           <input
             type="radio"
-            value={contactMode}
+            value="onEachStep"
             id="onEachStep"
             name="contactMode"
             onChange={(e) => setContactMode(e.target.value)}
@@ -284,7 +286,7 @@ const AddProject = () => {
         <div className="input-radio">
           <input
             type="radio"
-            value={contactMode}
+            value="onFinished"
             id="onFinished"
             name="contactMode"
             onChange={(e) => setContactMode(e.target.value)}
@@ -297,7 +299,7 @@ const AddProject = () => {
         <div className="input-radio">
           <input
             type="radio"
-            value={contactMode}
+            value="none"
             id="none"
             name="contactMode"
             onChange={(e) => setContactMode(e.target.value)}
