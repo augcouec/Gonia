@@ -1,2 +1,44 @@
 .add-project-page {
+  .steps-progression {
+    .steps-progression__step {
+      margin-bottom: 1rem;
+      span:last-of-type {
+        display: none;
+        color: $purple;
+      }
+    }
+
+    .steps-progression__step.active {
+      span:last-of-type {
+        display: inline;
+      }
+    }
+  }
+
+  .steps-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dimentions-inputs {
+    display: flex;
+    label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    label:first-of-type {
+      margin-left: 0;
+    }
+
+    label:last-of-type  {
+      margin-right: 0;
+    }
+  }
+
+  form {
+    label {
+      max-width: 50%;
+    }
+  }
 }

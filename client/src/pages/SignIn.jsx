@@ -4,6 +4,7 @@ import AuthenticationManager from "../services/AuthenticationManager";
 import logo from "../styles/asset/Logotype-Gonia.svg";
 import background from "../styles/asset/login_background.png";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 const SignIn = (props) => {
   const [emailValue, setEmailValue] = useState(null);
@@ -25,6 +26,7 @@ const SignIn = (props) => {
         window.location.href = "/dashboard";
       })
       .catch((error) => {
+        setLoadingSignIn(false);
         setErrorSignIn(true);
       });
     console.log(emailValue, passwordValue);
@@ -80,7 +82,9 @@ const SignIn = (props) => {
             </div>
             <button>Se connecter</button>
             {loadingSignIn && <Loader />}
-            {errorSignIn && <span>Les identifiants saisis sont invalides</span>}
+            {errorSignIn && (
+              <Error error="Les identifiants saisis sont invalides." />
+            )}
           </form>
           <p className="signature">Ce produit à été concu par HILO</p>
         </div>

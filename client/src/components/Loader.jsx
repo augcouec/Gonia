@@ -1,7 +1,7 @@
 import React from "react";
 
 const Loader = () => {
-  return <span>Chargement...</span>;
+  return <span className="d-block mt--m mb--m">Chargement...</span>;
 };
 
 export default Loader;

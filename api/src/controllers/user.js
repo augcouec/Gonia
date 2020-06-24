@@ -52,10 +52,10 @@ exports.createUser = (req, res) => {
     .insertOne(user)
     .then((user) => {
       if (!user) {
-        req.sendStatus(400);
+        res.sendStatus(400);
         return;
       }
-      req.status(201).send(user.id);
+      res.status(201).send(user.id);
     })
     .catch((error) => {
       res.status(500).send(error);
