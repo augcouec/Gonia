@@ -30,6 +30,7 @@ const AddProject = () => {
   const [productDetails, setProductDetails] = useState("");
   const [filesPartOne, setFilesPartOne] = useState([]);
   const [filesPartTwo, setFilesPartTwo] = useState([]);
+  const [contactMode, setContactMode] = useState("");
 
   const handleSubmit = () => {
     setErrorSubmit(false);
@@ -51,6 +52,7 @@ const AddProject = () => {
         material: productMaterial,
         url: productUrl,
         details: productDetails,
+        contactMode,
       },
     };
 
@@ -141,10 +143,9 @@ const AddProject = () => {
           l'infographiste d'avoir les données nécessaires pour faire la
           modélisation.
         </p>
-        <h3>Dimensions</h3>
+        <h4>Dimensions</h4>
         <span className="d-block bold mb--xs">Unité de mesure</span>
         <div className="input-radio">
-          <label htmlFor="milimeter">Milimètres</label>
           <input
             type="radio"
             checked
@@ -153,9 +154,9 @@ const AddProject = () => {
             name="dimensionUnit"
             onChange={(e) => setProductDimensionUnit(e.target.value)}
           />
+          <label htmlFor="milimeter">Milimètres</label>
         </div>
         <div className="input-radio">
-          <label htmlFor="inch">Pouces</label>
           <input
             type="radio"
             value={productDimensionUnit}
@@ -163,6 +164,7 @@ const AddProject = () => {
             name="dimensionUnit"
             onChange={(e) => setProductDimensionUnit(e.target.value)}
           />
+          <label htmlFor="inch">Pouces</label>
         </div>
         <div className="dimentions-inputs mb--m">
           <label>
@@ -193,7 +195,7 @@ const AddProject = () => {
             />
           </label>
         </div>
-        <h3>Autres informations</h3>
+        <h4>Autres informations</h4>
         <label>
           Matériel :
           <input
@@ -220,6 +222,7 @@ const AddProject = () => {
           rows="10"
           onChange={(e) => setProductDetails(e.target.value)}
         />
+        <h4 className="d-block mt--m">Fichiers</h4>
         <FilePond
           files={filesPartOne}
           allowMultiple={true}
@@ -244,7 +247,57 @@ const AddProject = () => {
     );
   };
 
-  const renderStepThree = () => {};
+  const renderStepThree = () => {
+    return (
+      <>
+        <h3 className="mt--xl">3. Validation et paiement</h3>
+        <h4>Suivi de l'état de l'annonce</h4>
+        <span className="d-block bold mb--xs">Préférences de contact</span>
+        <div className="input-radio">
+          <input
+            type="radio"
+            value={contactMode}
+            id="onEachStep"
+            name="contactMode"
+            onChange={(e) => setContactMode(e.target.value)}
+          />
+          <label htmlFor="onEachStep">
+            Je souhaite être notifié(e) par mail à chaque étape de l'avancée de
+            mon annonce.
+          </label>
+        </div>
+        <div className="input-radio">
+          <input
+            type="radio"
+            value={contactMode}
+            id="onFinished"
+            name="contactMode"
+            onChange={(e) => setContactMode(e.target.value)}
+          />
+          <label htmlFor="onFinished">
+            Je souhaite être notifié(e) par mail lorsque ma modélisation sera
+            terminée.
+          </label>
+        </div>
+        <div className="input-radio">
+          <input
+            type="radio"
+            value={contactMode}
+            id="none"
+            name="contactMode"
+            onChange={(e) => setContactMode(e.target.value)}
+          />
+          <label htmlFor="none">
+            Je ne souhaite pas être notifié(e) par mail.
+          </label>
+        </div>
+        <h4 className="d-block mt--m">
+          Informations de paiement et de facturation
+        </h4>
+        <div className="stripe-placeholder"></div>
+      </>
+    );
+  };
 
   return (
     <main className="add-project-page">
