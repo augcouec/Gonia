@@ -12,4 +12,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  .label-value {
+    width: 33%;
+  }
 }
