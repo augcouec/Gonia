@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AuthenticationManager from "../services/AuthenticationManager";
 import Api from "../services/Api";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 import ProjectCardAdmin from "../components/ProjectCardAdmin";
 
 const Dashboard = () => {
@@ -11,7 +12,6 @@ const Dashboard = () => {
   }
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [projects, setProjects] = useState([]);
   const [pendingProjects, setPendingProjects] = useState([]);
   const [todoProjects, setTodoProjects] = useState([]);
   const [doingProjects, setDoingProjects] = useState([]);
@@ -19,6 +19,8 @@ const Dashboard = () => {
   const [finishedProjects, setFinishedProjects] = useState([]);
 
   useEffect(() => {
+    setError(false);
+    setLoading(true);
     Api.get("/projects")
       .then((response) => {
         if (response.status !== 200) {
@@ -26,8 +28,6 @@ const Dashboard = () => {
           setError(true);
           return;
         }
-        console.log(response.data);
-        setProjects(response.data);
         setPendingProjects(
           response.data.filter((project) => project.status === "pending")
         );
@@ -43,6 +43,7 @@ const Dashboard = () => {
         setFinishedProjects(
           response.data.filter((project) => project.status === "finished")
         );
+        setLoading(false);
       })
       .catch(() => {
         setError(true);
@@ -55,33 +56,47 @@ const Dashboard = () => {
       <h1>Mes Annonces</h1>
       <h4>Annonce en attente de modération </h4>
       <div className="listing-card">
-        {pendingProjects.map((project, index) => (
-          <ProjectCardAdmin project={project} key={index} />
-        ))}
+        {error && <Error error="Une erreur est survenue." />}
+        {loading && <Loader />}
+        {!loading &&
+          pendingProjects.map((project, index) => (
+            <ProjectCardAdmin project={project} key={index} />
+          ))}
       </div>
       <h4>Annonce en attente d'infographiste </h4>
       <div className="listing-card">
-        {todoProjects.map((project, index) => (
-          <ProjectCardAdmin project={project} key={index} />
-        ))}
+        {error && <Error error="Une erreur est survenue." />}
+        {loading && <Loader />}
+        {!loading &&
+          todoProjects.map((project, index) => (
+            <ProjectCardAdmin project={project} key={index} />
+          ))}
       </div>
       <h4>Annonce en cours de création </h4>
       <div className="listing-card">
-        {doingProjects.map((project, index) => (
-          <ProjectCardAdmin project={project} key={index} />
-        ))}
+        {error && <Error error="Une erreur est survenue." />}
+        {loading && <Loader />}
+        {!loading &&
+          doingProjects.map((project, index) => (
+            <ProjectCardAdmin project={project} key={index} />
+          ))}
       </div>
       <h4>Annonce en attente de validation de qualité </h4>
       <div className="listing-card">
-        {doneProjects.map((project, index) => (
-          <ProjectCardAdmin project={project} key={index} />
-        ))}
+        {loading && <Loader />}
+        {!loading &&
+          doneProjects.map((project, index) => (
+            <ProjectCardAdmin project={project} key={index} />
+          ))}
       </div>
       <h4>Annonce archivées </h4>
       <div className="listing-card">
-        {finishedProjects.map((project, index) => (
-          <ProjectCardAdmin project={project} key={index} />
-        ))}
+        {error && <Error error="Une erreur est survenue." />}
+        {loading && <Loader />}
+        {!loading &&
+          finishedProjects.map((project, index) => (
+            <ProjectCardAdmin project={project} key={index} />
+          ))}
       </div>
     </main>
   );
