@@ -21,8 +21,14 @@ exports.getUsers = (req, res) => {
   const skip = req.query.skip ? parseInt(req.query.skip, 10) : 0;
   const limit = req.query.limit ? parseInt(req.query.limit, 10) : 100;
 
+  const query = {};
+
+  if (req.query.role) {
+    query.role = req.query.role;
+  }
+
   db.users
-    .find({}, null, { skip, limit })
+    .find(query, null, { skip, limit })
     .then((users) => {
       if (!users) {
         res.sendStatus(204);
