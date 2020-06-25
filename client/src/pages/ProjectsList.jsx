@@ -10,6 +10,8 @@ const Dashboard = () => {
   if (!role) {
     window.location.href = "/signin";
   }
+  const user = AuthenticationManager.getUser();
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [pendingProjects, setPendingProjects] = useState([]);
@@ -21,31 +23,85 @@ const Dashboard = () => {
   useEffect(() => {
     setError(false);
     setLoading(true);
-    Api.get("/projects")
+    const settings = { params: {} };
+
+    if (role === "client") {
+      settings.params.clientId = user._id;
+    }
+
+    Api.get("/projects", settings)
       .then((response) => {
         if (response.status !== 200) {
           setLoading(false);
           setError(true);
           return;
         }
-        setPendingProjects(
-          response.data.filter((project) => project.status === "pending")
-        );
+
+        // Pending
+        if (user.role !== "infographiste") {
+          setPendingProjects(
+            response.data.filter((project) => project.status === "pending")
+          );
+        }
+
+        // Todo
         setTodoProjects(
           response.data.filter((project) => project.status === "todo")
         );
-        setDoingProjects(
-          response.data.filter((project) => project.status === "doing")
-        );
-        setDoneProjects(
-          response.data.filter((project) => project.status === "done")
-        );
-        setFinishedProjects(
-          response.data.filter((project) => project.status === "finished")
-        );
+
+        // Doing
+        if (user.role === "infographiste") {
+          const doingProjects = response.data.filter(
+            (project) => project.status === "doing"
+          );
+          setDoingProjects(
+            doingProjects.filter(
+              (project) => project.infographiste._id === user._id
+            )
+          );
+        } else {
+          setDoingProjects(
+            response.data.filter((project) => project.status === "doing")
+          );
+        }
+
+        // Done
+        if (user.role === "infographiste") {
+          const doneProjects = response.data.filter(
+            (project) => project.status === "done"
+          );
+
+          setDoneProjects(
+            doneProjects.filter(
+              (project) => project.infographiste._id === user._id
+            )
+          );
+        } else {
+          setDoneProjects(
+            response.data.filter((project) => project.status === "done")
+          );
+        }
+
+        // Finished
+        if (user.role === "infographiste") {
+          const finishedProjects = response.data.filter(
+            (project) => project.status === "finished"
+          );
+          setFinishedProjects(
+            finishedProjects.filter(
+              (project) => project.infographiste._id === user._id
+            )
+          );
+        } else {
+          setFinishedProjects(
+            response.data.filter((project) => project.status === "finished")
+          );
+        }
+
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         setError(true);
         setLoading(false);
       });
@@ -54,91 +110,60 @@ const Dashboard = () => {
   return (
     <main className="projects-list-page">
       <h1>Mes Annonces</h1>
-      <h4>Annonce en attente de modération </h4>
-      <div className="listing-card">
-        {error && (
-          <div className="ml--s">
-            <Error error="Une erreur est survenue." />
+      {error && (
+        <Error error="Une erreur est survenue lors du chargement des annonces." />
+      )}
+      {loading && <Loader />}
+      {pendingProjects.length > 0 && (
+        <>
+          <h4>Annonce en attente de modération </h4>
+          <div className="listing-card">
+            {pendingProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
-        )}
-        {loading && (
-          <div className="ml--s">
-            <Loader />
+        </>
+      )}
+      {todoProjects.length > 0 && (
+        <>
+          <h4>Annonce en attente d'infographiste </h4>
+          <div className="listing-card">
+            {todoProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
-        )}
-        {!loading &&
-          pendingProjects.map((project, index) => (
-            <ProjectCardAdmin project={project} key={index} />
-          ))}
-      </div>
-      <h4>Annonce en attente d'infographiste </h4>
-      <div className="listing-card">
-        {error && (
-          <div className="ml--s">
-            <Error error="Une erreur est survenue." />
+        </>
+      )}
+      {doingProjects.length > 0 && (
+        <>
+          <h4>Annonce en cours de création </h4>
+          <div className="listing-card">
+            {doingProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
-        )}
-        {loading && (
-          <div className="ml--s">
-            <Loader />
+        </>
+      )}
+      {doneProjects && doneProjects.length > 0 && (
+        <>
+          <h4>Annonce en attente de validation de qualité </h4>
+          <div className="listing-card">
+            {doneProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
-        )}
-        {!loading &&
-          todoProjects.map((project, index) => (
-            <ProjectCardAdmin project={project} key={index} />
-          ))}
-      </div>
-      <h4>Annonce en cours de création </h4>
-      <div className="listing-card">
-        {error && (
-          <div className="mr--s">
-            <Error error="Une erreur est survenue." />
+        </>
+      )}
+      {finishedProjects && finishedProjects.length > 0 && (
+        <>
+          <h4>Annonce archivées </h4>
+          <div className="listing-card">
+            {finishedProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
-        )}
-        {loading && (
-          <div className="ml--s">
-            <Loader />
-          </div>
-        )}
-        {!loading &&
-          doingProjects.map((project, index) => (
-            <ProjectCardAdmin project={project} key={index} />
-          ))}
-      </div>
-      <h4>Annonce en attente de validation de qualité </h4>
-      <div className="listing-card">
-        {error && (
-          <div className="ml--s">
-            <Error error="Une erreur est survenue." />
-          </div>
-        )}
-        {loading && (
-          <div className="ml--s">
-            <Loader />
-          </div>
-        )}
-        {!loading &&
-          doneProjects.map((project, index) => (
-            <ProjectCardAdmin project={project} key={index} />
-          ))}
-      </div>
-      <h4>Annonce archivées </h4>
-      <div className="listing-card">
-        {error && (
-          <div className="ml--s">
-            <Error error="Une erreur est survenue." />
-          </div>
-        )}
-        {loading && (
-          <div className="ml--s">
-            <Loader />
-          </div>
-        )}
-        {!loading &&
-          finishedProjects.map((project, index) => (
-            <ProjectCardAdmin project={project} key={index} />
-          ))}
-      </div>
+        </>
+      )}
     </main>
   );
 };

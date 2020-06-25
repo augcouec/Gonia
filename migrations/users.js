@@ -21,6 +21,16 @@ const generateUsers = (number) => {
     });
   }
 
+  for (i = 0; i < number; i++) {
+    users.push({
+      role: roles[i],
+      email: `${roles[i]}_${i + 1}@gonia.fr`,
+      password: `${roles[i]}${i + 1}_gonia`,
+      firstname: chance.first({ nationality: "fr" }),
+      lastname: chance.last({ nationality: "fr" }),
+    });
+  }
+
   return users;
 };
 

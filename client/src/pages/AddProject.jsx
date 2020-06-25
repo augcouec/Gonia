@@ -127,7 +127,7 @@ const AddProject = () => {
           value={productCategory}
           onChange={(e) => setProductCategory(e.target.value)}
         >
-          <option value="">--Sélectionnez une catégorie--</option>
+          <option value="">Sélectionnez une catégorie</option>
           <option value="bottle">Bouteille</option>
           <option value="desk">Bureau</option>
           <option value="chair">Chaise</option>

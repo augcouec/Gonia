@@ -46,9 +46,20 @@ exports.getProjects = (req, res) => {
   const skip = req.query.skip ? parseInt(req.query.skip, 10) : 0;
   const limit = req.query.limit ? parseInt(req.query.limit, 10) : 20;
 
+  const query = {};
+  if (req.query.clientId) {
+    query.clientId = mongoist.ObjectId(req.query.clientId);
+  }
+  if (req.query.adminId) {
+    query.adminId = mongoist.ObjectId(req.query.adminId);
+  }
+  if (req.query.infographisteId) {
+    query.infographisteId = mongoist.ObjectId(req.query.infographisteId);
+  }
+
   db.projects
-    .findAsCursor({}, null, { skip, limit })
-    .sort({ creationDate: -1 })
+    .findAsCursor(query, null, { skip, limit })
+    .sort({ updateDate: -1, creationDate: -1 })
     .toArray()
     .then((projects) => {
       if (!projects) {
@@ -128,10 +139,24 @@ exports.createProject = (req, res) => {
 
 exports.updateProject = (req, res) => {
   const query = { _id: mongoist.ObjectId(req.params.id) };
-  const project = req.body;
-  project.updateDate = new Date();
+  const update = { updateDate: new Date() };
+
+  if (req.body.status) {
+    update.status = req.body.status;
+  }
+
+  if (req.body.adminId) {
+    const admin = mongoist.ObjectId(req.body.adminId);
+    update.adminId = admin;
+  }
+
+  if (req.body.infographisteId) {
+    const infographiste = mongoist.ObjectId(req.body.infographisteId);
+    update.infographisteId = infographiste;
+  }
+
   db.projects
-    .update(query, { $set: project })
+    .update(query, { $set: update })
     .then((update) => {
       if (!update) {
         res.sendStatus(400);

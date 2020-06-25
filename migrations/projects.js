@@ -52,7 +52,7 @@ const generateProjects = (number) => {
           adminId,
           infographisteId,
           product: {
-            name: `My super product ${i + 1}`,
+            name: chance.word(),
             sku: `AA00${i + 1}`,
             category:
               productCategories[
