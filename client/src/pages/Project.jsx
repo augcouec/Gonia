@@ -14,6 +14,8 @@ const Project = () => {
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errorSubmit, setErrorSubmit] = useState(false);
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [project, setProject] = useState(null);
 
   useEffect(() => {
@@ -35,6 +37,23 @@ const Project = () => {
       });
   }, []);
 
+  const handleValidation = () => {
+    const form = { status: "todo" };
+    Api.put(`/projects/${project._id}`, form)
+      .then((response) => {
+        if (response.status !== 200) {
+          setLoadingSubmit(false);
+          setErrorSubmit(true);
+          return;
+        }
+        document.location.reload();
+      })
+      .catch((err) => {
+        setErrorSubmit(true);
+        setLoadingSubmit(false);
+      });
+  };
+
   const renderProject = () => {
     return (
       <>
@@ -46,6 +65,12 @@ const Project = () => {
           <LabelValue label="Nom du produit" value={project.product.name} />
           <LabelValue label="SKU" value={project.product.sku} />
           <LabelValue label="Catégorie" value={project.product.category} />
+          {role === "admin" && (
+            <LabelValue
+              label="Client"
+              value={`${project.client.firstname} ${project.client.lastname}`}
+            />
+          )}
         </div>
         <h4 className="mt--l">2. Informations modélisation</h4>
         <span className="d-block bold mb--s">
@@ -86,6 +111,64 @@ const Project = () => {
             );
           })}
         </div>
+        {role === "admin" && project.status === "pending" && (
+          <>
+            <h4 className="mt--l">3. Validation et attribution de l'annonce</h4>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <div className="input-radio">
+                <input
+                  type="radio"
+                  value="true"
+                  id="automatic"
+                  name="attribution"
+                  defaultChecked
+                />
+                <label htmlFor="automatic">
+                  Proposer l'annonce à l'ensemble des infographistes
+                </label>
+              </div>
+              <div className="input-radio">
+                <input
+                  type="radio"
+                  value="true"
+                  id="notAutomatic"
+                  name="attribution"
+                />
+                <label htmlFor="notAutomatic">
+                  Sélectionner des infographistes indentifiés
+                </label>
+              </div>
+              <label>
+                Adresse email de l'infographiste :
+                <input
+                  type="text"
+                  placeholder="Adresse email de l'infographiste"
+                  disabled
+                  value={""}
+                />
+              </label>
+              <label htmlFor="productCategory">
+                Catégorie de prédilection :
+              </label>
+              <select id="infographisteEmail" disabled>
+                <option value="">Sélectionnez une catégorie</option>
+                <option value="bottle">Bouteille</option>
+                <option value="desk">Bureau</option>
+                <option value="chair">Chaise</option>
+              </select>
+
+              <button onClick={handleValidation}>Validation et envoi</button>
+              {loadingSubmit && <Loader />}
+              {errorSubmit && (
+                <Error error="Une erreur est survenue lors de la mise à jour de la commande" />
+              )}
+            </form>
+          </>
+        )}
       </>
     );
   };

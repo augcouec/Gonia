@@ -139,10 +139,10 @@ exports.createProject = (req, res) => {
 
 exports.updateProject = (req, res) => {
   const query = { _id: mongoist.ObjectId(req.params.id) };
-  const project = req.body;
-  project.updateDate = new Date();
+  const { status } = req.body;
+
   db.projects
-    .update(query, { $set: project })
+    .update(query, { $set: { status, updateDate: new Date() } })
     .then((update) => {
       if (!update) {
         res.sendStatus(400);
