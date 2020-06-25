@@ -101,10 +101,19 @@
 .card-commandes-line {
   display: flex;
   flex-direction: row;
-  padding: 0.5rem;
   justify-content: space-between;
   font-size: 0.8rem;
   align-items: center;
+  a {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    align-items: center;
+    width: 100%;
+    color: #000;
+  }
 }
 .card-commandes-line:nth-child(2n) {
   background-color: $background;
@@ -131,4 +140,45 @@
   &--finished {
     background: $finished;
   }
+}
+.dashboard-left-admin {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin-right: 5%;
+}
+.dashboard-left-listing-admin {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 8px;
+  margin: 10px;
+}
+.card-listing-admin-title {
+  font-size: 1.2em;
+}
+
+.card-listing-admin-project {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: #000;
+    span {
+      text-align: left;
+      width: 30%;
+    }
+  }
+}
+.card-listing-admin-project:nth-child(2n) {
+  background-color: $background;
 }
