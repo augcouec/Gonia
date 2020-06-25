@@ -232,25 +232,26 @@ const Project = () => {
                   Sélectionner des infographistes indentifiés
                 </label>
               </div>
-              <label>
-                Adresse email de l'infographiste :
-                <input
-                  type="text"
-                  placeholder="Adresse email de l'infographiste"
-                  disabled
-                  value={""}
-                />
-              </label>
-              <label htmlFor="productCategory">
-                Catégorie de prédilection :
-              </label>
-              <select id="infographisteEmail" disabled>
-                <option value="">Sélectionnez une catégorie</option>
-                <option value="bottle">Bouteille</option>
-                <option value="desk">Bureau</option>
-                <option value="chair">Chaise</option>
-              </select>
-
+              <div className="step-one">
+                <label>
+                  Adresse email de l'infographiste :
+                  <input
+                    type="text"
+                    placeholder="Adresse email de l'infographiste"
+                    disabled
+                    value={""}
+                  />
+                </label>
+                <label htmlFor="productCategory">
+                  Catégorie de prédilection :
+                </label>
+                <select id="infographisteEmail" disabled>
+                  <option value="">Sélectionnez une catégorie</option>
+                  <option value="bottle">Bouteille</option>
+                  <option value="desk">Bureau</option>
+                  <option value="chair">Chaise</option>
+                </select>
+              </div>
               <button onClick={handleValidation}>Validation et envoi</button>
               {loadingSubmit && <Loader />}
               {errorSubmit && (
