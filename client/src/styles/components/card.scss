@@ -9,6 +9,16 @@
   background-color: #fff;
   span {
     color: black;
+    font-size: 0.9em;
+  }
+  .label-blue {
+    color: #589bc6;
+  }
+  .product-name {
+    font-size: 1em;
+    font-weight: 600;
+    color: #c4c4c4;
+    text-transform: uppercase;
   }
 }
 .line-1 {
@@ -19,37 +29,32 @@
   align-items: center;
   margin-bottom: 1rem;
 }
-.product-name {
-  font-size: 1em;
-  font-weight: 600;
-  color: #535353;
-}
+
 .product-status {
   border-radius: 20px;
   padding: 5px 15px 5px 15px;
   font-size: 0.8em;
-  font-weight: 600;
   text-transform: capitalize;
   border: solid 2px;
 
   &--pending {
-    border-color: $pending;
-    color: $pending !important;
+    background-color: $pending;
+    color: #fff !important;
   }
   &--todo {
-    border-color: $purple;
-    color: $purple !important;
+    background-color: $purple;
+    color: #fff !important;
   }
   &--doing {
-    border-color: orange;
-    color: orange !important;
+    background-color: orange;
+    color: #fff !important;
   }
   &--done {
-    border-color: $done;
-    color: $done !important;
+    background-color: $done;
+    color: #fff !important;
   }
   &--finished {
-    border-color: $finished;
-    color: $finished !important;
+    background-color: $finished;
+    color: #fff !important;
   }
 }
