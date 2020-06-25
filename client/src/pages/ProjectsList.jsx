@@ -117,10 +117,9 @@ const Dashboard = () => {
         <>
           <h4>Annonce en attente de modération </h4>
           <div className="listing-card">
-            {!loading &&
-              pendingProjects.map((project, index) => (
-                <ProjectCardAdmin project={project} key={index} />
-              ))}
+            {pendingProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
         </>
       )}
@@ -128,10 +127,9 @@ const Dashboard = () => {
         <>
           <h4>Annonce en attente d'infographiste </h4>
           <div className="listing-card">
-            {!loading &&
-              todoProjects.map((project, index) => (
-                <ProjectCardAdmin project={project} key={index} />
-              ))}
+            {todoProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
         </>
       )}
@@ -139,10 +137,9 @@ const Dashboard = () => {
         <>
           <h4>Annonce en cours de création </h4>
           <div className="listing-card">
-            {!loading &&
-              doingProjects.map((project, index) => (
-                <ProjectCardAdmin project={project} key={index} />
-              ))}
+            {doingProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
         </>
       )}
@@ -150,10 +147,9 @@ const Dashboard = () => {
         <>
           <h4>Annonce en attente de validation de qualité </h4>
           <div className="listing-card">
-            {!loading &&
-              doneProjects.map((project, index) => (
-                <ProjectCardAdmin project={project} key={index} />
-              ))}
+            {doneProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
         </>
       )}
@@ -161,10 +157,9 @@ const Dashboard = () => {
         <>
           <h4>Annonce archivées </h4>
           <div className="listing-card">
-            {!loading &&
-              finishedProjects.map((project, index) => (
-                <ProjectCardAdmin project={project} key={index} />
-              ))}
+            {finishedProjects.map((project, index) => (
+              <ProjectCardAdmin project={project} key={index} />
+            ))}
           </div>
         </>
       )}
