@@ -36,24 +36,71 @@ const Dashboard = () => {
           setError(true);
           return;
         }
-        setPendingProjects(
-          response.data.filter((project) => project.status === "pending")
-        );
+
+        // Pending
+        if (user.role !== "infographiste") {
+          setPendingProjects(
+            response.data.filter((project) => project.status === "pending")
+          );
+        }
+
+        // Todo
         setTodoProjects(
           response.data.filter((project) => project.status === "todo")
         );
-        setDoingProjects(
-          response.data.filter((project) => project.status === "doing")
-        );
-        setDoneProjects(
-          response.data.filter((project) => project.status === "done")
-        );
-        setFinishedProjects(
-          response.data.filter((project) => project.status === "finished")
-        );
+
+        // Doing
+        if (user.role === "infographiste") {
+          const doingProjects = response.data.filter(
+            (project) => project.status === "doing"
+          );
+          setDoingProjects(
+            doingProjects.filter(
+              (project) => project.infographiste._id === user._id
+            )
+          );
+        } else {
+          setDoingProjects(
+            response.data.filter((project) => project.status === "doing")
+          );
+        }
+
+        // Done
+        if (user.role === "infographiste") {
+          const doneProjects = response.data.filter(
+            (project) => project.status === "done"
+          );
+
+          setDoneProjects(
+            doneProjects.filter(
+              (project) => project.infographiste._id === user._id
+            )
+          );
+        } else {
+          setDoneProjects(
+            response.data.filter((project) => project.status === "done")
+          );
+        }
+
+        // Finished
+        if (user.role === "infographiste") {
+          const finishedProjects = response.data.filter(
+            (project) => project.status === "finished"
+          );
+          setFinishedProjects(
+            finishedProjects.filter(
+              (project) => project.infographiste._id === user._id
+            )
+          );
+        } else {
+          setFinishedProjects(
+            response.data.filter((project) => project.status === "finished")
+          );
+        }
+
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
         setError(true);
         setLoading(false);
       });
@@ -66,7 +113,7 @@ const Dashboard = () => {
         <Error error="Une erreur est survenue lors du chargement des annonces." />
       )}
       {loading && <Loader />}
-      {pendingProjects && pendingProjects.length > 0 && (
+      {pendingProjects.length > 0 && (
         <>
           <h4>Annonce en attente de modération </h4>
           <div className="listing-card">
@@ -77,7 +124,7 @@ const Dashboard = () => {
           </div>
         </>
       )}
-      {todoProjects && todoProjects.length > 0 && (
+      {todoProjects.length > 0 && (
         <>
           <h4>Annonce en attente d'infographiste </h4>
           <div className="listing-card">
@@ -88,7 +135,7 @@ const Dashboard = () => {
           </div>
         </>
       )}
-      {doingProjects && doingProjects.length > 0 && (
+      {doingProjects.length > 0 && (
         <>
           <h4>Annonce en cours de création </h4>
           <div className="listing-card">

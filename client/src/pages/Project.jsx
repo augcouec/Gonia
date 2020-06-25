@@ -26,7 +26,7 @@ const Project = () => {
           setError(true);
           return;
         }
-        console.log(response.data);
+
         setProject(response.data);
       })
       .catch(() => {
@@ -81,6 +81,7 @@ const Project = () => {
               <img
                 src={`https://picsum.photos/300?grayscale?random=${index + 1}`}
                 alt="Photo du produit"
+                key={index}
               />
             );
           })}
