@@ -31,7 +31,7 @@ const ProjectCard = (props) => {
 
         {props.project.infographiste && (
           <div>
-            <span className="product-label">Modélisé par :</span>
+            <span className="product-label">Modélisé par : </span>
             <span>{props.project.infographiste.firstname}</span>
           </div>
         )}

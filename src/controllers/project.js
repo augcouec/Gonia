@@ -57,8 +57,6 @@ exports.getProjects = (req, res) => {
     query.infographisteId = mongoist.ObjectId(req.query.infographisteId);
   }
 
-  console.log(query);
-
   db.projects
     .findAsCursor(query, null, { skip, limit })
     .sort({ creationDate: -1 })
