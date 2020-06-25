@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import AuthenticationManager from "../services/AuthenticationManager";
 import Api from "../services/Api";
 import illu from "../styles/asset/Shield.png";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 const Dashboard = () => {
   const role = AuthenticationManager.getRole();
@@ -11,7 +13,7 @@ const Dashboard = () => {
   const user = AuthenticationManager.getUser();
   const userFirstName = user.firstname;
   const userId = user._id;
-  console.log(user);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -21,15 +23,19 @@ const Dashboard = () => {
     setLoading(true);
     Api.get("/projects", {
       params: { clientId: userId },
-    }).then((response) => {
-      setLoading(false);
-      if (response.status !== 200) {
+    })
+      .then((response) => {
+        setLoading(false);
+        if (response.status !== 200) {
+          setError(true);
+          return;
+        }
+        setProjects(response.data);
+      })
+      .catch(() => {
+        setLoading(false);
         setError(true);
-        return;
-      }
-      setProjects(response.data);
-      console.log(response.data);
-    });
+      });
   }, []);
 
   return (
@@ -44,7 +50,11 @@ const Dashboard = () => {
       </div>
       <div className="dashboard-container">
         <div className="dashboard-left">
-          {projects.length && (
+          {loading && <Loader />}
+          {error && (
+            <Error error="Une erreur est survenue lors du chargement des commandes." />
+          )}
+          {projects.length > 0 && (
             <div className="card-resume">
               <div className="card-resume-left">
                 <img src={illu} alt="" />
@@ -106,15 +116,20 @@ const Dashboard = () => {
           </div>
           <div className="card-annonces">
             <div className="card-commandes-listing">
-              {projects.slice(0, 10).map((project, index) => (
-                <div className="card-commandes-line">
-                  <span>{project.product.name}</span>
-                  <div className={`cercle cercle--${project.status}`}></div>
-                </div>
-              ))}
+              {loading && <Loader />}
+              {error && (
+                <Error error="Une erreur est survenue lors des annonces." />
+              )}
+              {projects.length > 0 &&
+                projects.slice(0, 10).map((project, index) => (
+                  <div className="card-commandes-line">
+                    <span>{project.product.name}</span>
+                    <div className={`cercle cercle--${project.status}`}></div>
+                  </div>
+                ))}
             </div>
 
-            <a href="/projects/add" className="button mt--s">
+            <a href="/projects" className="button mt--s">
               Voir toute mes commandes
             </a>
           </div>
