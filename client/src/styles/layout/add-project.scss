@@ -17,11 +17,6 @@
     }
   }
 
-  .steps-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
   .detail-container {
     display: flex;
   }
@@ -66,4 +61,10 @@
       max-width: 100%;
     }
   }
+}
+
+.steps-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
