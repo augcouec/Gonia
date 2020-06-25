@@ -13,17 +13,17 @@ const ProjectCard = (props) => {
           </span>
         </div>
         <div className="product-code-sku mb--xs">
-          <span className="product-label">Code Sku : </span>
+          <span className=" semi-bold label-blue">Code Sku : </span>
           <span className="product-sku">{props.project.product.sku}</span>
         </div>
         <div className="product-category-container  mb--xs">
-          <span className="product-label">Categorie : </span>
+          <span className=" semi-bold label-blue">Categorie : </span>
           <span className="product-category">
             {props.project.product.category}
           </span>
         </div>
         <div className="product-client-container  mb--xs">
-          <span className="product-label">Client : </span>
+          <span className=" semi-bold label-blue">Client : </span>
           <span className="product-client">
             {props.project.client.firstname}
           </span>
@@ -31,7 +31,9 @@ const ProjectCard = (props) => {
 
         {props.project.infographiste && (
           <div>
-            <span className="product-label">Modélisé par : </span>
+            <span className="product-label semi-bold label-blue">
+              Modélisé par :{" "}
+            </span>
             <span>{props.project.infographiste.firstname}</span>
           </div>
         )}
