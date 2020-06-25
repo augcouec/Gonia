@@ -46,8 +46,21 @@ exports.getProjects = (req, res) => {
   const skip = req.query.skip ? parseInt(req.query.skip, 10) : 0;
   const limit = req.query.limit ? parseInt(req.query.limit, 10) : 20;
 
+  const query = {};
+  if (req.query.clientId) {
+    query.clientId = mongoist.ObjectId(req.query.clientId);
+  }
+  if (req.query.adminId) {
+    query.adminId = mongoist.ObjectId(req.query.adminId);
+  }
+  if (req.query.infographisteId) {
+    query.infographisteId = mongoist.ObjectId(req.query.infographisteId);
+  }
+
+  console.log(query);
+
   db.projects
-    .findAsCursor({}, null, { skip, limit })
+    .findAsCursor(query, null, { skip, limit })
     .sort({ creationDate: -1 })
     .toArray()
     .then((projects) => {
