@@ -54,6 +54,7 @@ const Dashboard = () => {
           const doingProjects = response.data.filter(
             (project) => project.status === "doing"
           );
+          console.log(doingProjects);
           setDoingProjects(
             doingProjects.filter(
               (project) => project.infographiste._id === user._id
@@ -101,6 +102,7 @@ const Dashboard = () => {
         setLoading(false);
       })
       .catch((err) => {
+        console.log(err);
         setError(true);
         setLoading(false);
       });

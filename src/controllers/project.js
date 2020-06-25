@@ -59,7 +59,7 @@ exports.getProjects = (req, res) => {
 
   db.projects
     .findAsCursor(query, null, { skip, limit })
-    .sort({ creationDate: -1 })
+    .sort({ updateDate: -1, creationDate: -1 })
     .toArray()
     .then((projects) => {
       if (!projects) {
@@ -139,10 +139,24 @@ exports.createProject = (req, res) => {
 
 exports.updateProject = (req, res) => {
   const query = { _id: mongoist.ObjectId(req.params.id) };
-  const { status } = req.body;
+  const update = { updateDate: new Date() };
+
+  if (req.body.status) {
+    update.status = req.body.status;
+  }
+
+  if (req.body.adminId) {
+    const admin = mongoist.ObjectId(req.body.adminId);
+    update.adminId = admin;
+  }
+
+  if (req.body.infographisteId) {
+    const infographiste = mongoist.ObjectId(req.body.infographisteId);
+    update.infographisteId = infographiste;
+  }
 
   db.projects
-    .update(query, { $set: { status, updateDate: new Date() } })
+    .update(query, { $set: update })
     .then((update) => {
       if (!update) {
         res.sendStatus(400);

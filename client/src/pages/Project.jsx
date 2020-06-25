@@ -7,10 +7,12 @@ import Error from "../components/Error";
 import LabelValue from "../components/LabelValue";
 
 const Project = () => {
+  const user = AuthenticationManager.getUser();
   const role = AuthenticationManager.getRole();
   if (!role) {
     window.location.href = "/signin";
   }
+
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ const Project = () => {
   }, []);
 
   const handleValidation = () => {
-    const form = { status: "todo" };
+    const form = { status: "todo", adminId: user._id };
     Api.put(`/projects/${project._id}`, form)
       .then((response) => {
         if (response.status !== 200) {
@@ -48,7 +50,24 @@ const Project = () => {
         }
         document.location.reload();
       })
-      .catch((err) => {
+      .catch(() => {
+        setErrorSubmit(true);
+        setLoadingSubmit(false);
+      });
+  };
+
+  const selectProject = () => {
+    const form = { status: "doing", infographisteId: user._id };
+    Api.put(`/projects/${project._id}`, form)
+      .then((response) => {
+        if (response.status !== 200) {
+          setLoadingSubmit(false);
+          setErrorSubmit(true);
+          return;
+        }
+        document.location.reload();
+      })
+      .catch(() => {
         setErrorSubmit(true);
         setLoadingSubmit(false);
       });
@@ -167,6 +186,13 @@ const Project = () => {
                 <Error error="Une erreur est survenue lors de la mise à jour de la commande" />
               )}
             </form>
+          </>
+        )}
+        {role === "infographiste" && project.status === "todo" && (
+          <>
+            <h4 className="mt--l">3. Modélisation</h4>
+            Si vous êtes intéressé par cette annonce, veuillez la sélectionner.
+            <button onClick={selectProject}>Sélectionner</button>
           </>
         )}
       </>
