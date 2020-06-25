@@ -8,24 +8,37 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <img src={logo} alt="" className="sidebar__brand" />
-      <ul>
-        <li>
-          <NavLink to="/dashboard" activeClassName="active">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/projects" activeClassName="active">
-            Commandes
-          </NavLink>
-        </li>
-        <li>
-          <a className="disabled">Facturation</a>
-        </li>
-        <li>
-          <a className="disabled">Mon stockage</a>
-        </li>
-      </ul>
+      <div className="sidebar__lists">
+        <ul>
+          <li>
+            <NavLink to="/dashboard" activeClassName="active">
+              Tableau de bord
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/projects" activeClassName="active">
+              Annonces
+            </NavLink>
+          </li>
+          <li>
+            <a className="disabled">Facturation</a>
+          </li>
+          <li>
+            <a className="disabled">Mon stockage</a>
+          </li>
+        </ul>
+        <ul className="bottom-links">
+          <li>
+            <a className="disabled">Bibliotèque</a>
+          </li>
+          <li>
+            <a className="disabled">Paramètres</a>
+          </li>
+        </ul>
+      </div>
+      <span className="powered">
+        Powered by <strong>Hilo</strong>
+      </span>
     </aside>
   );
 };

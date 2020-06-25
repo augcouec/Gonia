@@ -93,7 +93,7 @@ const AddProject = () => {
 
   const renderStepOne = () => {
     return (
-      <>
+      <div className="step-one">
         <h3 className="mt--xl">1. Identification du produit</h3>
         <p className="mb--m">
           Les informations saisies dans cette partie du formulaire serviront à
@@ -132,7 +132,7 @@ const AddProject = () => {
           <option value="desk">Bureau</option>
           <option value="chair">Chaise</option>
         </select>
-      </>
+      </div>
     );
   };
 

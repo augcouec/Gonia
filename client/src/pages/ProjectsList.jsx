@@ -109,7 +109,7 @@ const Dashboard = () => {
 
   return (
     <main className="projects-list-page">
-      <h1>Mes Annonces</h1>
+      <h1>Mes annonces</h1>
       {error && (
         <Error error="Une erreur est survenue lors du chargement des annonces." />
       )}

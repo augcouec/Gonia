@@ -1,7 +1,7 @@
 import React from "react";
 
 const Loader = () => (
-  <div class="loader" title="0">
+  <div className="loader" title="0">
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -10,7 +10,7 @@ const Loader = () => (
       width="40px"
       height="40px"
       viewBox="0 0 40 40"
-      enable-background="new 0 0 40 40"
+      enableBackground="new 0 0 40 40"
     >
       <path
         opacity="0.2"
